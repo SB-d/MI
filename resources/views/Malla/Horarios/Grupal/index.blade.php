@@ -33,44 +33,77 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <form class="mt-4">
+                                <form class="mt-4" action="{{ route('Grupal.create') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" id="USER_ID" name="USER_ID" value="{{ Auth::user()->id }}">
                                     <div class="row">
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Ciudad</label>
-                                                <select name="" id="" class="form-control">
+                                                <label>Cliente</label>
+                                                <select ame="CLI_ID" id="CLI_ID" class="form-control">
                                                     <option value="">-- Seleccione --</option>
+                                                    @foreach ($clientes as $cli)
+                                                        <option value="{{ $cli->CLI_ID }}">{{ $cli->CLI_NOMBRE }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Correo</label>
-                                                <select name="" id="" class="form-control">
-                                                    <option value="">-- Seleccione --</option>
+                                                <label>Campañas</label>
+                                                <select name="CAM_ID" id="CAM_ID" class="form-control">
+                                                    {{-- SELECT CAMPAÑA --}}
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Correo</label>
-                                                <input type="date" class="form-control">
+                                                <label>Fecha inicial</label>
+                                                <input type="date" name="FECHA_INICIAL" id="FECHA_INICIAL" class="form-control" min=<?php $hoy = date('Y-m-d'); echo $hoy; ?>>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Correo</label>
-                                                <input type="date" class="form-control">
+                                                <label>Fecha final</label>
+                                                <input type="date" name="FECHA_FINAL" id="FECHA_FINAL" class="form-control" min=<?php $hoy = date('Y-m-d'); echo $hoy; ?>>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="row">
+                                    <div class="row" id="jornada">
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Ciudad</label>
-                                                <select name="" id="" class="form-control">
+                                                <label>Jornada</label>
+                                                <select name="JOR_ID" id="JOR_ID" class="form-control">
                                                     <option value="">-- Seleccione --</option>
+                                                    @foreach ($jornadas as $jor)
+                                                        <option value="{{ $jor->JOR_ID }}">{{ $jor->JOR_NOMBRE }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" id="for_fecha" style="display: none;">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Hora inicial</label>
+                                                <select name="HORA_INICIAL" id="HOR_ID2" class="form-control">
+                                                    <option value=""></option>
+                                                    @foreach ($horas as $hor)
+                                                        <option value="{{ $hor->HOR_ID }}">{{ $hor->HOR_INICIO }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Hora final</label>
+                                                <select name="HORA_FINAL" id="HOR_ID2" class="form-control">
+                                                    <option value=""></option>
+                                                    @foreach ($horas as $hor)
+                                                        <option value="{{ $hor->HOR_ID }}">{{ $hor->HOR_FINAL }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -85,26 +118,7 @@
 
                                     <br>
 
-                                    <div class="row" id="for_fecha" style="display: none;">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Hora inicial</label>
-                                                <select name="" id="" class="form-control">
-                                                    <option value="">-- Seleccione --</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Hora final</label>
-                                                <select name="" id="" class="form-control">
-                                                    <option value="">-- Seleccione --</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <button type="submit" class="btn btn-primary">Agregar</button>
+                                    <button type="submit" class="btn btn-primary">Asignar</button>
                                 </form>
                             </div>
                         </div>
@@ -118,69 +132,19 @@
                             <div class="card-body">
 
                                 <!-- column -->
-                                    <div class="col-12">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h4 class="card-title">Agentes asignados </h4>
-                                                <div class="table-responsive">
-                                                    <table class="table no-wrap">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Invoice</th>
-                                                                <th>User</th>
-                                                                <th>Date</th>
-                                                                <th>Amount</th>
-                                                                <th>Status</th>
-                                                                <th>Country</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td><a href="javascript:void(0)">Order #26589</a></td>
-                                                                <td>Herman Beck</td>
-                                                                <td><span class="text-muted"><i class="far fa-clock"></i> Oct 16, 2019</span> </td>
-                                                                <td>$45.00</td>
-                                                                <td>
-                                                                    <div class="label label-table label-success">Paid</div>
-                                                                </td>
-                                                                <td>EN</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><a href="javascript:void(0)">Order #58746</a></td>
-                                                                <td>Mary Adams</td>
-                                                                <td><span class="text-muted"><i class="far fa-clock"></i> Oct 12, 2019</span> </td>
-                                                                <td>$245.30</td>
-                                                                <td>
-                                                                    <div class="label label-table label-danger">Shipped</div>
-                                                                </td>
-                                                                <td>CN</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><a href="javascript:void(0)">Order #98458</a></td>
-                                                                <td>Caleb Richards</td>
-                                                                <td><span class="text-muted"><i class="far fa-clock"></i> May 18, 2019</span> </td>
-                                                                <td>$38.00</td>
-                                                                <td>
-                                                                    <div class="label label-table label-info">Shipped</div>
-                                                                </td>
-                                                                <td>AU</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><a href="javascript:void(0)">Order #32658</a></td>
-                                                                <td>June Lane</td>
-                                                                <td><span class="text-muted"><i class="far fa-clock"></i> Apr 28, 2019</span> </td>
-                                                                <td>$77.99</td>
-                                                                <td>
-                                                                    <div class="label label-table label-success">Paid</div>
-                                                                </td>
-                                                                <td>FR</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="table-responsive">
+                                    <table class="table no-wrap display responsive nowrap" id="table_equipos">
+                                        <thead>
+                                            <tr>
+                                                <th>Campaña</th>
+                                                <th>Empleado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody name="tablaempleados" id="tablaempleados">
+
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <!-- column -->
 
                             </div>
@@ -191,6 +155,6 @@
                 <!-- End Page Content -->
                 <!-- ============================================================== -->
 
-
+                <script src="{{ asset('js/malla_grupal.js') }}"></script>
 
 @endsection

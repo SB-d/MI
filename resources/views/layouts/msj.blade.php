@@ -41,3 +41,18 @@
     });
     </script>
 @endif
+
+<!--msj de warning --->
+@if (Session::has('reportewar'))
+<script>
+    $.toast({
+        heading: '',
+        text: '{{ Session::get('reportewar') }}',
+        position: 'top-right',
+        loaderBg: '#ff6849',
+        icon: 'warning',
+        hideAfter: 3000,
+        stack: 6
+    });
+    </script>
+@endif

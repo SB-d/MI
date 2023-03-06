@@ -17,8 +17,10 @@
     <title>MI</title>
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('../assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('../assets/plugins/dropify/dist/css/dropify.min.css') }}">
     <!-- Calendar CSS -->
-    <link href="{{ asset('../assets/plugins/calendar/dist/fullcalendar.css') }}" rel="stylesheet" />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.1/locales-all.global.min.js'></script>
     <!-- Custom CSS -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <!-- You can change the theme colors from here -->
@@ -78,6 +80,7 @@
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
+                @include('Malla.Horarios.Consultar.fecha')
                 @yield('main')
             </div>
             <!-- ============================================================== -->
@@ -117,16 +120,13 @@
     <script src="{{ asset('../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js') }}"></script>
     <!--Custom JavaScript -->
     <script src="{{ asset('js/custom.min.js') }}"></script>
-    <!-- Calendar JavaScript -->
-    <script src="{{ asset('../assets/plugins/calendar/jquery-ui.min.js') }}"></script>
-    <script src="{{ asset('../assets/plugins/moment/moment.js') }}"></script>
-    <script src='{{ asset('../assets/plugins/calendar/dist/fullcalendar.min.js') }}'></script>
-    <script src="{{ asset('../assets/plugins/calendar/dist/cal-init.js') }}"></script>
     <!-- ====================== TABLE ====================== -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
     <!-- ====================== NOTIFICACION ====================== -->
     <script src="{{ asset('../assets/plugins/toast-master/js/jquery.toast.js') }}"></script>
+    <!-- ====================== UPLOAD ====================== -->
+    <script src="{{ asset('../assets/plugins/dropify/dist/js/dropify.min.js')  }}"></script>
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->
@@ -134,7 +134,6 @@
 
 
     {{-- NOTIFICACIONES --}}
-
     @include('layouts.msj')
     @include('layouts.tables')
 </body>

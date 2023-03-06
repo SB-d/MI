@@ -9,30 +9,39 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form  action="{{ route('Jornada.create') }}" method="POST">
+                    @csrf
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Hora inicial</label>
-                                <input type="text" class="form-control" >
+                                <select name="JOR_INICIO" id="JOR_INICIO" class="form-control">
+                                    @foreach ($horas as $hor)
+                                        <option value="{{ $hor->HOR_ID }}">{{ $hor->HOR_INICIO }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Hora final</label>
-                                <input type="text" class="form-control" >
+                                <select name="JOR_FINAL" id="JOR_FINAL" class="form-control">
+                                    @foreach ($horas as $hor)
+                                        <option value="{{ $hor->HOR_ID }}">{{ $hor->HOR_FINAL }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Nombre</label>
-                        <input type="email" class="form-control" >
+                        <input type="text" class="form-control" id="JOR_NOMBRE" name="JOR_NOMBRE">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-success" >Guardar</button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal">Guardar</button>
             </div>
         </div>
         <!-- /.modal-content -->

@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Malla;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
+use \Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\jornada;
+use App\Models\hora;
 
 class JornadasController extends Controller
 {
@@ -21,7 +26,9 @@ class JornadasController extends Controller
     public function index()
     {
         //
-        return view('Malla.Jornada.index');
+        $jornadas = jornada::where('JOR_ESTADO', '=', '1')->get();
+        $horas = hora::where('HOR_ESTADO', '=', '1')->get();
+        return view('Malla.Jornada.index', compact('jornadas', 'horas'));
     }
 
     /**
@@ -29,9 +36,19 @@ class JornadasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(request $request)
     {
         //
+        $request->validate([
+            'JOR_NOMBRE' => 'required',
+            'JOR_INICIO' => 'required',
+            'JOR_FINAL' => 'required'
+        ]);
+
+        $datosjornadas = request()->except('_token');
+        jornada::insert($datosjornadas);
+
+        return redirect()->back()->with('rgcmessage', 'jornada cargada con exito!...');
     }
 
     /**
@@ -77,6 +94,11 @@ class JornadasController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $datosjornadas = request()->except(['_token','_method']);
+        jornada::where('JOR_ID','=', $id)->update($datosjornadas);
+
+        Session::flash('msjupdate', '¡La jornada se a actualizado correctamente!...');
+        return redirect()->back();
     }
 
     /**
@@ -88,5 +110,8 @@ class JornadasController extends Controller
     public function destroy($id)
     {
         //
+        /* jornada::where('JOR_ID', $id)->delete(); */
+        jornada::where('JOR_ID', $id)->update(['JOR_ESTADO' => '0']);
+        return redirect()->back()->with('msjdelete', 'jornada borrada correctamente!...');
     }
 }

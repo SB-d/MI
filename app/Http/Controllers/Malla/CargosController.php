@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Malla;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
+use \Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\cargo;
 
 class CargosController extends Controller
 {
@@ -21,72 +25,39 @@ class CargosController extends Controller
     public function index()
     {
         //
-        return view('Malla.Cargo.index');
+        $cargos = cargo::where('CAR_ESTADO', '=','1')->get();
+
+        return view('Malla.Cargo.index', compact('cargos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+     public function create(request $request)
     {
-        //
+        $request->validate([
+            'CAR_CODE' => 'required',
+            'CAR_NOMBRE' => 'required'
+        ]);
+
+        $datosCargo = request()->except('_token');
+        cargo::insert($datosCargo);
+
+        return redirect()->back()->with('rgcmessage', 'Cargo cargado con exito!...');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        /* cargo::where('CAR_ID', $id)->delete(); */
+        cargo::where('CAR_ID', $id)->update(['CAR_ESTADO' => '0']);
+        return redirect()->back()->with('msjdelete', 'Cargo borrado correctamente!...');
+    }
+
+    public function update(request $request, $id)
+    {
+
+        $datosCargo = request()->except(['_token','_method']);
+        cargo::where('CAR_ID','=', $id)->update($datosCargo);
+
+
+        Session::flash('msjupdate', '¡El Cargo se a actualizado correctamente!...');
+        return redirect()->back();
     }
 }

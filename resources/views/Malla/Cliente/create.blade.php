@@ -9,20 +9,21 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form action="{{ route('Cliente.create') }}" method="POST" name="form-data" novalidate>
+                    @csrf
                     <div class="form-group">
                         <label>Codigo</label>
-                        <input type="text" class="form-control" >
+                        <input type="number" class="form-control" id="CLI_CODE" name="CLI_CODE" required pattern="[0-9]+">
                     </div>
                     <div class="form-group">
                         <label>Nombre</label>
-                        <input type="email" class="form-control" >
+                        <input type="text" class="form-control" id="CLI_NOMBRE" name="CLI_NOMBRE" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-success" >Guardar</button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal">Guardar</button>
             </div>
         </div>
         <!-- /.modal-content -->

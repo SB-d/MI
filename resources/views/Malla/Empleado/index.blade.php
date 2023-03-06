@@ -8,10 +8,10 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-6 col-8 align-self-center">
-                        <h3 class="text-themecolor mb-0 mt-0">Gestionar jornadas</h3>
+                        <h3 class="text-themecolor mb-0 mt-0">Empleados</h3>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Gestionar jornadas</li>
+                            <li class="breadcrumb-item active">Empleados</li>
                         </ol>
                     </div>
                     <div class="col-md-6 col-4 align-self-center">
@@ -35,69 +35,53 @@
                             <div class="card-body">
 
                                 <!-- column -->
-                                    <div class="col-12">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h4 class="card-title">Responsive Table </h4>
-                                                <div class="table-responsive">
-                                                    <table class="table no-wrap">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Invoice</th>
-                                                                <th>User</th>
-                                                                <th>Date</th>
-                                                                <th>Amount</th>
-                                                                <th>Status</th>
-                                                                <th>Country</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td><a href="javascript:void(0)">Order #26589</a></td>
-                                                                <td>Herman Beck</td>
-                                                                <td><span class="text-muted"><i class="far fa-clock"></i> Oct 16, 2019</span> </td>
-                                                                <td>$45.00</td>
-                                                                <td>
-                                                                    <div class="label label-table label-success">Paid</div>
-                                                                </td>
-                                                                <td>EN</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><a href="javascript:void(0)">Order #58746</a></td>
-                                                                <td>Mary Adams</td>
-                                                                <td><span class="text-muted"><i class="far fa-clock"></i> Oct 12, 2019</span> </td>
-                                                                <td>$245.30</td>
-                                                                <td>
-                                                                    <div class="label label-table label-danger">Shipped</div>
-                                                                </td>
-                                                                <td>CN</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><a href="javascript:void(0)">Order #98458</a></td>
-                                                                <td>Caleb Richards</td>
-                                                                <td><span class="text-muted"><i class="far fa-clock"></i> May 18, 2019</span> </td>
-                                                                <td>$38.00</td>
-                                                                <td>
-                                                                    <div class="label label-table label-info">Shipped</div>
-                                                                </td>
-                                                                <td>AU</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><a href="javascript:void(0)">Order #32658</a></td>
-                                                                <td>June Lane</td>
-                                                                <td><span class="text-muted"><i class="far fa-clock"></i> Apr 28, 2019</span> </td>
-                                                                <td>$77.99</td>
-                                                                <td>
-                                                                    <div class="label label-table label-success">Paid</div>
-                                                                </td>
-                                                                <td>FR</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="table-responsive">
+                                    <table class="table no-wrap display responsive nowrap" id="table_equipos">
+                                        <thead>
+                                            <tr>
+                                                <th>Opciones</th>
+                                                <th>Codigo de empleado</th>
+                                                <th>Documento</th>
+                                                <th>Nombre completo</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($empleados as $list)
+                                                <tr>
+                                                    <td>
+
+                                                         <form action="{{ route('Empleado.delete', $list->EMP_ID) }}" method="POST"
+                                                            style="display: inline-block; ">
+                                                            @csrf
+                                                            @method('DELETE')
+
+                                                            <button type="submit" class="btn btn-danger" rel="tooltip"
+                                                                onclick="return confirm('Seguro que quiere eliminar este empleado?') ">
+                                                                <i class="fas fa-trash-alt" title="Eliminar Registro"></i>
+                                                            </button>
+
+                                                        </form>
+
+                                                        <button type="button" class="btn btn-primary" rel="tooltip" data-toggle="modal" data-target="#Edit_Empleado{{ $list->EMP_ID }}">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+                                                        {{--
+                                                        <a type="button" class="btn btn-primary" href="{{ route('empleado.contratos.index', $list->EMP_ID) }}"><i
+                                                                class="fas fa-file-alt"></i></a> --}}
+
+                                                    </td>
+                                                    <td>{{ $list->EMP_CODE }}</td>
+                                                    <td>{{ $list->EMP_CEDULA }}</td>
+                                                    <td>{{ $list->EMP_NOMBRES }}</td>
+                                                    <td>{{ $list->CAM_NOMBRE }}</td>
+                                                </tr>
+                                                @include('Malla.Empleado.edit')
+                                            @endforeach
+
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <!-- column -->
 
                             </div>
@@ -111,5 +95,8 @@
 
                 @include('Malla.Empleado.create')
                 @include('Malla.Empleado.importar')
+
+
+                <script src="{{ asset('js/select_municipio.js') }}"></script>
 
 @endsection

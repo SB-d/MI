@@ -9,20 +9,22 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form action="{{ route('Unidad_Negocio.create') }}" method="POST" name="form-data" novalidate>
+                    @csrf
+                    <input type="hidden" value="{{ Auth::user()->id }}" id="USER_ID" name="USER_ID">
                     <div class="form-group">
                         <label>Codigo</label>
-                        <input type="text" class="form-control" >
+                        <input type="number" class="form-control" id="UNI_CODE" name="UNI_CODE" required>
                     </div>
                     <div class="form-group">
                         <label>Nombre</label>
-                        <input type="email" class="form-control" >
+                        <input type="text" class="form-control" id="UNI_NOMBRE" name="UNI_NOMBRE" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-success" >Guardar</button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal">Guardar</button>
             </div>
         </div>
         <!-- /.modal-content -->

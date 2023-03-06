@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Malla;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use \Illuminate\Support\Facades\Auth;
 
 class NovedadesController extends Controller
 {
@@ -21,7 +23,15 @@ class NovedadesController extends Controller
     public function index()
     {
         //
-        return view('Malla.Novedades.index');
+        $sql = "SELECT mal.MAL_INICIO, tin.TIN_NOMBRE, emp.EMP_NOMBRES, nov.NOV_FECHA, usu.name
+        FROM novedades AS nov
+        LEFT JOIN mallas AS mal ON mal.MAL_ID = nov.MAL_ID
+        LEFT JOIN tipos_novedades AS tin ON tin.TIN_ID = nov.TIN_ID
+        LEFT JOIN empleados AS emp ON emp.EMP_ID = nov.EMP_ID
+        LEFT JOIN users AS usu ON usu.id = nov.USER_ID";
+
+        $novedades = DB::select($sql);
+        return view('Malla.Novedades.index', compact('novedades'));
     }
 
     /**

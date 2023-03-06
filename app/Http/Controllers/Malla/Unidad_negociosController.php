@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Malla;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use App\Models\unidad_negocio;
+use Illuminate\Support\Facades\Session;
+
 
 class Unidad_negociosController extends Controller
 {
@@ -21,7 +25,8 @@ class Unidad_negociosController extends Controller
     public function index()
     {
         //
-        return view('Malla.Unidad_Negocio.index');
+        $unidad_negocio = unidad_negocio::where('UNI_ESTADO', '=', '1')->get();
+        return view('Malla.Unidad_Negocio.index', compact('unidad_negocio'));
     }
 
     /**
@@ -29,9 +34,18 @@ class Unidad_negociosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(request $request)
     {
         //
+        $request->validate([
+            'UNI_NOMBRE' => 'required',
+            'UNI_CODE' => 'required'
+        ]);
+
+        $datosUniNegocio = request()->except('_token');
+        unidad_negocio::insert($datosUniNegocio);
+
+        return redirect()->back()->with('rgcmessage', '¡Unidad de Negocio cargada con exito!...');
     }
 
     /**
@@ -77,6 +91,12 @@ class Unidad_negociosController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $datosUniNegocios = request()->except(['_token','_method']);
+        unidad_negocio::where('UNI_ID','=', $id)->update($datosUniNegocios);
+
+
+        Session::flash('msjupdate', '¡La Unidad de Negocio se a actualizado correctamente!...');
+        return redirect()->back();
     }
 
     /**
@@ -88,5 +108,8 @@ class Unidad_negociosController extends Controller
     public function destroy($id)
     {
         //
+        /* unidad_negocio::where('UNI_ID', $id)->delete(); */
+        unidad_negocio::where('UNI_ID', $id)->update(['UNI_ESTADO' => '0']);
+        return redirect()->back()->with('msjdelete', '¡Unidad de Negicio borrada correctamente!...');
     }
 }

@@ -9,21 +9,25 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form action="{{ route('Cargo.create') }}" method="POST" name="form-data" novalidate>
+                    @csrf
+                    <input type="number" class="form-control" id="USER_ID" name="USER_ID"
+                        value="{{ Auth::user()->id }}"required pattern="[0-9]+" style="display: none;">
                     <div class="form-group">
                         <label>Codigo</label>
-                        <input type="text" class="form-control" >
+                        <input type="number" class="form-control" id="CAR_CODE" name="CAR_CODE" required pattern="[0-9]+">
                     </div>
                     <div class="form-group">
                         <label>Nombre</label>
-                        <input type="email" class="form-control" >
+                        <input type="text" class="form-control" id="CAR_NOMBRE" name="CAR_NOMBRE" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-success" >Guardar</button>
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal">Guardar</button>
-            </div>
+
         </div>
         <!-- /.modal-content -->
     </div>

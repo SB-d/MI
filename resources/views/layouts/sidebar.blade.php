@@ -24,6 +24,7 @@
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{ route('Unidad_Negocio.index') }}">Gestionar unidades de negocio</a></li>
                                 <li><a href="{{ route('Cliente.index') }}">Gestionar clientes</a></li>
+                                <li><a href="{{ route('Uni_cli.index') }}">Relacionar Uni - Cli</a></li>
                             </ul>
                         </li>
                         <li>
@@ -31,7 +32,7 @@
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{ route('Jornada.index') }}">Gestionar jornadas</a></li>
                                 <li><a href="{{ route('Campana.index') }}">Gestionar campañas</a></li>
-                                <li><a href="{{ route('Contrato.index') }}">Gestionar relación de campañas</a></li>
+                                {{-- <li><a href="{{ route('Contrato.index') }}">Gestionar relación de campañas</a></li> --}}
                             </ul>
                         </li>
                         <li class="nav-devider"></li>
@@ -50,7 +51,7 @@
                             <a href="{{ route('Selectiva.index') }}" aria-expanded="false"><i class="mdi mdi-calendar-range"></i><span class="hide-menu">Horario selectivo {{-- <span class="label label-rounded label-success">5</span> --}}</span></a>
                         </li>
                         <li>
-                            <a href="#4" aria-expanded="false"><i class="mdi mdi-calendar-text"></i><span class="hide-menu">Consultar horario {{-- <span class="label label-rounded label-success">5</span> --}}</span></a>
+                            <a href="#"  rel="tooltip" data-toggle="modal" data-target="#look_for_date"><i class="mdi mdi-calendar-text"></i><span class="hide-menu">Consultar horario {{-- <span class="label label-rounded label-success">5</span> --}}</span></a>
                         </li>
                         <li class="nav-devider"></li>
                         <li class="nav-small-cap">  INVENTARIO</li>
@@ -75,10 +76,17 @@
                         <li class="nav-devider"></li>
                         <li class="nav-small-cap">  ANALISIS</li>
                         <li>
-                            <a href="{{ route('Reporte.index') }}" aria-expanded="false"><i class="mdi mdi-file-chart"></i><span class="hide-menu">Reportes {{-- <span class="label label-rounded label-success">5</span> --}}</span></a>
+                            <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-file-chart"></i><span class="hide-menu">Reportes {{-- <span class="label label-rounded label-success">5</span> --}}</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{ route('Reporte.operational') }}">Operativo</a></li>
+                                <li><a href="{{ route('Reporte.diary') }}">General por hoy</a></li>
+                                <li><a href="{{ route('Reporte.fecha') }}">General por fecha</a></li>
+                                <li><a href="{{ route('Reporte.campana') }}">General por campaña</a></li>
+                                <li><a href="{{ route('Reporte.financiero') }}">Financiero</a></li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="{{ route('Novedades.index') }}" aria-expanded="false"><i class="mdi mdi-file-chart"></i><span class="hide-menu">Novedades {{-- <span class="label label-rounded label-success">5</span> --}}</span></a>
+                            <a href="{{ route('Novedades.index') }}" aria-expanded="false"><i class="mdi mdi-message-alert"></i><span class="hide-menu">Novedades {{-- <span class="label label-rounded label-success">5</span> --}}</span></a>
                         </li>
 
 

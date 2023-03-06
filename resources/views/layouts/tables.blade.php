@@ -3,13 +3,16 @@
         // Get the checkbox
         var checkBox = document.getElementById("check_fecha");
         // Get the output text
-        var text = document.getElementById("for_fecha");
+        var for_fecha = document.getElementById("for_fecha");
+        var jornada = document.getElementById("jornada");
 
-        // If the checkbox is checked, display the output text
+        // If the checkbox is checked, display the output for_fecha
         if (checkBox.checked == true){
-            text.style.display = "";
+            for_fecha.style.display = "";
+            jornada.style.display = "none";
         } else {
-            text.style.display = "none";
+            for_fecha.style.display = "none";
+            jornada.style.display = "";
         }
     }
 

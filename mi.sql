@@ -351,7 +351,7 @@ INSERT INTO `empleados` (`EMP_ID`, `USER_ID`, `CAR_ID`, `EMP_CODE`, `EMP_CEDULA`
 (223, 254, 1, 'C14', 1124051631, 'CORAIMA TORRES NARANJO', '', NULL, NULL, NULL, NULL, NULL, 1000000, NULL, 15, NULL, NULL, NULL, 'coraimatorres@contacta.com.co', 1, '2023-01-20 20:57:38', NULL),
 (224, 255, 1, 'C15', 1047336434, 'DAYANA AGUAS CHARRIS', NULL, NULL, NULL, NULL, NULL, NULL, 1000000, NULL, 15, NULL, NULL, NULL, 'dayanaaguas@contacta.com.co', 1, '2023-01-20 20:57:38', NULL),
 (225, 256, 1, 'C16', 1140892291, 'YARLIN ANDRADE PEREZ', NULL, NULL, NULL, NULL, NULL, NULL, 1000000, NULL, 15, NULL, NULL, NULL, 'yarlinandrare@contacta.com.co', 1, '2023-01-20 21:00:33', NULL);
-
+contratoseq
 -- --------------------------------------------------------
 
 --
