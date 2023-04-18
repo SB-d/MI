@@ -8,10 +8,10 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-6 col-8 align-self-center">
-                        <h3 class="text-themecolor mb-0 mt-0">Gestionar relación de campañas</h3>
+                        <h3 class="text-themecolor mb-0 mt-0">Gestionar contrato de {{ $empleado[0]->EMP_NOMBRES }}</h3>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Gestionar relación de campañas</li>
+                            <li class="breadcrumb-item active">Gestionar contrato de {{ $empleado[0]->EMP_NOMBRES }}</li>
                         </ol>
                     </div>
                     <div class="col-md-6 col-4 align-self-center">
@@ -33,70 +33,93 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <!-- column -->
-                                    <div class="col-12">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h4 class="card-title">Responsive Table </h4>
-                                                <div class="table-responsive">
-                                                    <table class="table no-wrap">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Invoice</th>
-                                                                <th>User</th>
-                                                                <th>Date</th>
-                                                                <th>Amount</th>
-                                                                <th>Status</th>
-                                                                <th>Country</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td><a href="javascript:void(0)">Order #26589</a></td>
-                                                                <td>Herman Beck</td>
-                                                                <td><span class="text-muted"><i class="far fa-clock"></i> Oct 16, 2019</span> </td>
-                                                                <td>$45.00</td>
-                                                                <td>
-                                                                    <div class="label label-table label-success">Paid</div>
-                                                                </td>
-                                                                <td>EN</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><a href="javascript:void(0)">Order #58746</a></td>
-                                                                <td>Mary Adams</td>
-                                                                <td><span class="text-muted"><i class="far fa-clock"></i> Oct 12, 2019</span> </td>
-                                                                <td>$245.30</td>
-                                                                <td>
-                                                                    <div class="label label-table label-danger">Shipped</div>
-                                                                </td>
-                                                                <td>CN</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><a href="javascript:void(0)">Order #98458</a></td>
-                                                                <td>Caleb Richards</td>
-                                                                <td><span class="text-muted"><i class="far fa-clock"></i> May 18, 2019</span> </td>
-                                                                <td>$38.00</td>
-                                                                <td>
-                                                                    <div class="label label-table label-info">Shipped</div>
-                                                                </td>
-                                                                <td>AU</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><a href="javascript:void(0)">Order #32658</a></td>
-                                                                <td>June Lane</td>
-                                                                <td><span class="text-muted"><i class="far fa-clock"></i> Apr 28, 2019</span> </td>
-                                                                <td>$77.99</td>
-                                                                <td>
-                                                                    <div class="label label-table label-success">Paid</div>
-                                                                </td>
-                                                                <td>FR</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div class="row">
+                                    <div class="col-md-3 col-xs-6 border-right"> <strong>Nombre completo</strong>
+                                        <br>
+                                        <p class="text-muted">{{ $empleado[0]->EMP_NOMBRES }}</p>
                                     </div>
+                                    <div class="col-md-3 col-xs-6 border-right"> <strong>Documento</strong>
+                                        <br>
+                                        <p class="text-muted">{{ $empleado[0]->EMP_CEDULA }}</p>
+                                    </div>
+                                    <div class="col-md-3 col-xs-6 border-right"> <strong>Contacto</strong>
+                                        <br>
+                                        <p class="text-muted">{{ $empleado[0]->EMP_TELEFONO }}</p>
+                                    </div>
+                                    <div class="col-md-3 col-xs-6"> <strong>Direccion</strong>
+                                        <br>
+                                        <p class="text-muted">{{ $empleado[0]->EMP_DIRECCION }}</p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-3 col-xs-6 border-right"> <strong>Codigo</strong>
+                                        <br>
+                                        <p class="text-muted">{{ $empleado[0]->EMP_CODE }}</p>
+                                    </div>
+                                    <div class="col-md-3 col-xs-6 border-right"> <strong>Sexo</strong>
+                                        <br>
+                                        <p class="text-muted">{{ $empleado[0]->EMP_SEXO }}</p>
+                                    </div>
+                                    <div class="col-md-3 col-xs-6 border-right"> <strong>Fecha de nacimiento</strong>
+                                        <br>
+                                        <p class="text-muted">{{ $empleado[0]->EMP_FECHA_NACIMIENTO }}</p>
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <!-- column -->
+                                <div class="table-responsive">
+                                    <table class="table no-wrap display responsive nowrap" id="table_equipos">
+                                        <thead>
+                                            <tr>
+                                                <th>Cargo</th>
+                                                <th>Tipo Contrato</th>
+                                                <th>Sueldo</th>
+                                                <th>Fecha Inicio</th>
+                                                <th>Fecha Fin</th>
+                                                <th>Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($contratos as $con)
+                                                <tr>
+                                                    <td>{{ $con->CAR_NOMBRE }}</td>
+                                                    <td>{{ $con->TIC_NOMBRE }}</td>
+                                                    <td>{{ $con->EMC_SUELDO }}</td>
+                                                    <td>{{ $con->EMC_FECHA_INI }}</td>
+                                                    <td>{{ $con->EMC_FECHA_FIN }}</td>
+                                                    <td>
+                                                        @if ($con->EMC_FINALIZADO == 'NO')
+                                                                <form action="{{ route('Contrato.finish', $con->EMC_ID) }}"
+                                                                    method="POST" style="display: inline-block; ">
+                                                                    @csrf
+
+                                                                    <button type="submit" class="btn btn-danger" rel="tooltip"
+                                                                        onclick="return confirm('Seguro que quiere finalizar este contrato?') ">
+                                                                        <i class="fas fa-cut"></i>
+                                                                    </button>
+
+                                                                </form>
+
+                                                                <a class="btn btn-primary" href="{{ route('Funcione.index', $con->EMC_ID) }}">
+                                                                    <i class="fas fa-people-carry"></i>
+                                                                    <span>Funciones</span></a>
+                                                            @endif
+
+                                                        <button class="btn float-right hidden-sm-down btn-success" data-toggle="modal" data-target="#Pdf_{{$con->EMC_ID}}"><i class="fas fa-file-pdf"></i></button>
+
+                                                        </button>
+
+                                                    </td>
+                                                </tr>
+
+                                                @include('Malla.Contrato.pdf')
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <!-- column -->
 
                             </div>
@@ -110,4 +133,5 @@
 
                 @include('Malla.Contrato.create')
 
-@endsection
+
+                @endsection

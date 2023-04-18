@@ -12,7 +12,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('../assets/images/favicon.png') }}">
-    <title>Monster Admin Template - The Most Complete & Trusted Bootstrap 4 Admin Template</title>
+    <title>MI</title>
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('../assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Custom CSS -->
@@ -39,12 +39,12 @@
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <section id="wrapper">
-        <div class="login-register" style="background-image:url(../assets/images/background/login-register.jpg);">
+        <div class="login-register" style="background-image:url(../assets/images/background/portal_V01.jpg);">
             <div class="login-box card">
             <div class="card-body">
                 <form class="form-horizontal form-material" method="POST" action="{{ route('login') }}">
                     @csrf
-                    <h3 class="box-title mb-3">Sign In</h3>
+                    <h3 class="box-title mb-3">MI PORTAL</h3>
                     <div class="form-group ">
                         <div class="col-xs-12">
                             <input class="form-control" type="email" required="" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>

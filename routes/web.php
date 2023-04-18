@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('/MI', function () {
+    return view('Malla.Contrato.file_pdf');
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -29,7 +33,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/Users', [App\Http\Controllers\Main\UserController::class, 'index'])->name('Users.index');
 
 //GENERAL :: ROLES
-
 Route::resource('Roles', App\Http\Controllers\Main\RolController::class);
 /* Route::get('/Roles', [App\Http\Controllers\Main\RolController::class, 'index'])->name('Roles.index');
 Route::patch('/Roles/update/{id}', [App\Http\Controllers\Main\RolController::class, 'update'])->name('Roles.update');
@@ -47,6 +50,10 @@ Route::get('/select/mun', [App\Http\Controllers\Malla\SelectController::class, '
 Route::get('/calendario/agente', [App\Http\Controllers\Malla\CalendarioController::class, 'calendario_Agente'])->name('Calendario.agente');
 Route::get('/supervisor/calendario/agente', [App\Http\Controllers\Malla\CalendarioController::class, 'calendario_Supervisor_Agente'])->name('Calendario.supervisor.agente');
 
+//MALLA :: FIRMA
+Route::get('/Firma', [App\Http\Controllers\Malla\FirmaController::class, 'index'])->name('Firma.index');
+Route::post('/Firma/imagen', [App\Http\Controllers\Malla\FirmaController::class, 'cambiar_firma'])->name('Firma.change_img');
+Route::post('/Firma/texto', [App\Http\Controllers\Malla\FirmaController::class, 'cambiar_nombre_firma'])->name('Firma.change_text');
 
 //MALLA :: CARGOS
 Route::get('/Cargos', [App\Http\Controllers\Malla\CargosController::class, 'index'])->name('Cargo.index');
@@ -66,6 +73,18 @@ Route::post('/Empleado', [App\Http\Controllers\Malla\EmpleadosController::class,
 Route::delete('/Empleado/delete/{id}', [App\Http\Controllers\Malla\EmpleadosController::class, 'destroy'])->name('Empleado.delete');
 Route::put('/Empleado/update/{id}', [App\Http\Controllers\Malla\EmpleadosController::class, 'update'])->name('Empleado.update');
 Route::post('/Empleado/import', [App\Http\Controllers\Malla\EmpleadosController::class, 'importData'])->name('Empleado.import');
+
+//MALLA :: CONTRATOS
+Route::get('/Contrato historico/{emp_id}', [App\Http\Controllers\Malla\ContratosController::class, 'index'])->name('Contrato.index');
+Route::post('/Contratos creacion/{emp_id}', [App\Http\Controllers\Malla\ContratosController::class, 'create'])->name('Contrato.create');
+Route::post('/con/{con_id}', [App\Http\Controllers\Malla\ContratosController::class, 'finish'])->name('Contrato.finish');
+Route::get('/con/{emc_id}/pdf', [App\Http\Controllers\Malla\ContratosController::class, 'pdf'])->name('Contrato.pdf');
+
+//MALLA :: FUNCIONES
+Route::get('/Funciones/{emc_id}', [App\Http\Controllers\Malla\FuncionesController::class, 'index'])->name('Funcione.index');
+Route::post('/Funciones', [App\Http\Controllers\Malla\FuncionesController::class, 'create'])->name('Funcione.create');
+Route::delete('/Funciones/delete/{id}', [App\Http\Controllers\Malla\FuncionesController::class, 'destroy'])->name('Funcione.delete');
+Route::put('/Funciones/update/{id}', [App\Http\Controllers\Malla\FuncionesController::class, 'update'])->name('Funcione.update');
 
 //MALLA :: UNIDAD DE NEGOCIO
 Route::get('/Unidad de negocios', [App\Http\Controllers\Malla\Unidad_negociosController::class, 'index'])->name('Unidad_Negocio.index');
@@ -90,10 +109,6 @@ Route::get('/Campaña', [App\Http\Controllers\Malla\CampanasController::class, '
 Route::post('/Campaña', [App\Http\Controllers\Malla\CampanasController::class, 'create'])->name('Campana.create');
 Route::delete('/Campaña/delete/{id}', [App\Http\Controllers\Malla\CampanasController::class, 'destroy'])->name('Campana.delete');
 Route::put('/Campaña/update/{id}', [App\Http\Controllers\Malla\CampanasController::class, 'update'])->name('Campana.update');
-
-//MALLA :: CAMPAÑA
-Route::get('/Contratos', [App\Http\Controllers\Malla\ContratosController::class, 'index'])->name('Contrato.index');
-Route::post('/Contratos', [App\Http\Controllers\Malla\ContratosController::class, 'create'])->name('Contrato.create');
 
 //MALLA :: AGENTE
 Route::get('/Agente', [App\Http\Controllers\Malla\AgentesController::class, 'index'])->name('Agente.index');

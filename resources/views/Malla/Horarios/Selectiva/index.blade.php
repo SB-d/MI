@@ -8,10 +8,10 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-6 col-8 align-self-center">
-                        <h3 class="text-themecolor mb-0 mt-0">Malla de horarios selectiva</h3>
+                        <h3 class="text-themecolor mb-0 mt-0">Malla de horarios masivos</h3>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Malla de horarios selectiva</li>
+                            <li class="breadcrumb-item active">Malla de horarios masivos</li>
                         </ol>
                     </div>
                     <div class="col-md-6 col-4 align-self-center">

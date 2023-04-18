@@ -51,9 +51,25 @@
                                                                     <td>{{ $Rol->id }}</td>
                                                                     <td>{{ $Rol->name }}</td>
                                                                     <td>
+                                                                        @can('editar-rol')
                                                                         <button type="button" class="btn btn-primary" rel="tooltip" data-toggle="modal" data-target="#Edit_Rol{{ $Rol->id }}">
                                                                             <i class="fas fa-edit"></i>
                                                                         </button>
+                                                                        @endcan
+
+                                                                        @can('borrar-rol')
+                                                                            <form action="{{ route('Roles.destroy', $Rol->id) }}" method="POST"
+                                                                                style="display: inline-block; ">
+                                                                                @csrf
+                                                                                @method('DELETE')
+
+                                                                                <button type="submit" class="btn btn-danger" rel="tooltip"
+                                                                                    onclick="return confirm('Seguro que quiere eliminar este Rol?') ">
+                                                                                    <i class="fas fa-trash-alt" title="Eliminar Registro"></i>
+                                                                                </button>
+
+                                                                            </form>
+                                                                        @endcan
                                                                     </td>
                                                                 </tr>
                                                                 @include('main.Roles.edit')

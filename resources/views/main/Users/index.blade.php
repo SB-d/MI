@@ -17,7 +17,7 @@
 
                     </div>
                     <div class="col-md-6 col-4 align-self-center">
-                        <button class="btn float-right hidden-sm-down btn-success" data-toggle="modal" data-target="#Add_Equipos"><i class="mdi mdi-plus-circle"></i> Agregar</button>
+                        <button class="btn float-right hidden-sm-down btn-success" data-toggle="modal" data-target="#AddtUser"><i class="mdi mdi-plus-circle"></i> Agregar</button>
                         {{-- <div class="dropdown float-right mr-2 hidden-sm-down">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> January 2019 </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> <a class="dropdown-item" href="#">February 2019</a> <a class="dropdown-item" href="#">March 2019</a> <a class="dropdown-item" href="#">April 2019</a> </div>
@@ -60,19 +60,48 @@
                                                                             @endforeach
                                                                         @endif
                                                                     </td>
-                                                                    <td></td>
+                                                                    <td>
+                                                                        <button class="btn float-right hidden-sm-down btn-success" data-toggle="modal" data-target="#editModal{{ $User->id }}"><i class="fas fa-edit"></i></button>
+                                                                        {{-- <button type="button" class="btn btn-primary" rel="tooltip" data-toggle="modal" data-target="#EditUser{{ $User->id }}">
+                                                                            <i class="fas fa-edit"></i>
+                                                                        </button> --}}
+
+                                                                        <div class="modal fade" id="editModal{{ $User->id }}" tabindex="-1"
+                                                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                            <div class="modal-dialog">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header">
+                                                                                        <h1 class="modal-tittle fs-5" id="exampleModalLebel">Editar Usuaruis</h1>
+                                                                                        <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        <form action="{{-- {{ route('Users.update', $User ->id )}} --}}" method="post">
+                                                                                            @csrf @method('PUT')
+                                                                                            <div class="form-group">
+                                                                                                <label for="name">Nombre</label>
+                                                                                                <input type="text" class="form-control"
+                                                                                                name="name" value="{{ $User->name }}">
+                                                                                            </div>
+                                                                                            <div>
+                                                                                                <label for="email">Email</label>
+                                                                                                <input type="text" class="form-control"
+                                                                                                name="email" value="{{ $User->email }}">
+                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                                                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </td>
                                                                 </tr>
+                                                                @include('main.Users.edit')
                                                             @endforeach
-                                                            {{-- <tr>
-                                                                <td><a href="javascript:void(0)">Order #26589</a></td>
-                                                                <td>Herman Beck</td>
-                                                                <td><span class="text-muted"><i class="far fa-clock"></i> Oct 16, 2019</span> </td>
-                                                                <td>$45.00</td>
-                                                                <td>
-                                                                    <div class="label label-table label-success">Paid</div>
-                                                                </td>
-                                                                <td>EN</td>
-                                                            </tr> --}}
 
                                                         </tbody>
                                                     </table>

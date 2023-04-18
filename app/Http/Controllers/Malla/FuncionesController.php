@@ -1,32 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\Main;
+namespace App\Http\Controllers\Malla;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
-use DB;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
+use \Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
-class RolController extends Controller
+use App\Models\emc_funcione;
+
+class FuncionesController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($emc_id)
     {
         //
-        $Permissions = Permission::get();
-        $Roles = Role::all();
+        $funciones = emc_funcione::where('EMF_ESTADO', '=','1')->where('EMC_ID', '=', $emc_id)->get();
 
-        return view('main.Roles.index', compact('Permissions','Roles'));
+        return view('Malla.Funciones.index', compact('funciones', 'emc_id'));
     }
 
     /**
@@ -34,12 +29,14 @@ class RolController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(request $request)
     {
         //
-        $permission = Permission::get();
-        return view ('roles.create', compact('permission'));
 
+        $datosfuncione = request()->except('_token');
+        emc_funcione::insert($datosfuncione);
+
+        return redirect()->back()->with('rgcmessage', 'funcion cargada con exito!...');
     }
 
     /**
@@ -51,10 +48,6 @@ class RolController extends Controller
     public function store(Request $request)
     {
         //
-        $Roles = Role::create(['name' => $request->input('name')]);
-        $Roles->syncPermissions($request->input('permissions'));
-
-        return redirect()->back()->with('rgcmessage', 'Rol cargado con exito!...');
     }
 
     /**
@@ -89,19 +82,10 @@ class RolController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->validate($request, [
-            'name' => 'required',
-            'permission' => 'required',
-        ]);
+        $datosfuncione = request()->except(['_token','_method']);
+        emc_funcione::where('EMF_ID','=', $id)->update($datosfuncione);
 
-        $Roles = Role::find($id);
-        $Roles->name = $request->input('name');
-        $Roles->save();
-
-        $Roles->syncPermissions($request->input('permission'));
-
-        Session::flash('msjupdate', '¡El rol se a actualizado correctamente!...');
-        return redirect()->back();
+        return redirect()->back()->with('warmessage', '¡El funcion se a actualizado correctamente!...');
     }
 
     /**
@@ -113,7 +97,8 @@ class RolController extends Controller
     public function destroy($id)
     {
         //
-        DB::table("roles")->where('id',$id)->delete();
-        return redirect()->back()->with('msjdelete', '¡Se borro el registro correctamente!...');
+         /* emc_funcione::where('CAR_ID', $id)->delete(); */
+         emc_funcione::where('EMF_ID', $id)->update(['EMF_ESTADO' => '0']);
+         return redirect()->back()->with('msjdelete', 'funcion borrada correctamente!...');
     }
 }

@@ -10,6 +10,7 @@
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{ route('Roles.index') }}">Gestionar roles</a></li>
                                 <li><a href="{{ route('Users.index') }}">Gestionar usuarios</a></li>
+                                <li><a href="{{ route('Firma.index') }}">Gestionar firma</a></li>
                             </ul>
                         </li>
                         <li>
@@ -44,11 +45,11 @@
                         <li>
                             <a href="{{ route('Individual.index') }}" aria-expanded="false"><i class="mdi mdi-calendar"></i><span class="hide-menu">Horario individual {{-- <span class="label label-rounded label-success">5</span> --}}</span></a>
                         </li>
+                        {{-- <li>
+                            <a href="{{ route('Grupal.index') }}" aria-expanded="false"><i class="mdi mdi-calendar-multiple"></i><span class="hide-menu">Horario grupal </span></a>
+                        </li> --}}
                         <li>
-                            <a href="{{ route('Grupal.index') }}" aria-expanded="false"><i class="mdi mdi-calendar-multiple"></i><span class="hide-menu">Horario grupal {{-- <span class="label label-rounded label-success">5</span> --}}</span></a>
-                        </li>
-                        <li>
-                            <a href="{{ route('Selectiva.index') }}" aria-expanded="false"><i class="mdi mdi-calendar-range"></i><span class="hide-menu">Horario selectivo {{-- <span class="label label-rounded label-success">5</span> --}}</span></a>
+                            <a href="{{ route('Selectiva.index') }}" aria-expanded="false"><i class="mdi mdi-calendar-range"></i><span class="hide-menu">Horario masivo {{-- <span class="label label-rounded label-success">5</span> --}}</span></a>
                         </li>
                         <li>
                             <a href="#"  rel="tooltip" data-toggle="modal" data-target="#look_for_date"><i class="mdi mdi-calendar-text"></i><span class="hide-menu">Consultar horario {{-- <span class="label label-rounded label-success">5</span> --}}</span></a>
